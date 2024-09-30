@@ -1,0 +1,34 @@
+package org.example.hundred;
+
+public class ValidateBinarySearchTree {
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        return helper(root, Long.MAX_VALUE, Long.MIN_VALUE);
+    }
+
+    private boolean helper(TreeNode node, long max, long min) {
+        if (node == null) return true;
+        if (node.val > max || node.val < min) {
+            return false;
+        }
+        return helper(node.left, (long) node.val - 1, min) && helper(node.right, max, (long) node.val + 1);
+    }
+}
